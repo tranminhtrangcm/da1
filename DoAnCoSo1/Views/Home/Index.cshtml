@@ -1,0 +1,192 @@
+﻿@using DoAnCoSo1.Models
+@using DoAnCoSo1.Helpers
+@{
+    ViewBag.Title = "Trang chủ";
+    var listDienThoai = (List<SanPham>)ViewData["listDienThoai"];
+    var listMayTinhBang = (List<SanPham>)ViewData["listMayTinhBang"];
+    var listLaptop = (List<SanPham>)ViewData["listLaptop"];
+    var listLinhKien = (List<SanPham>)ViewData["listLinhKien"];
+}
+@*<div class="container-fluid px-0">
+    <div class="site-slider w-100">
+        <div class="slider-one">
+            <div>
+                <img src="~/Content/images/samsung-logo.svg" class="image-fluid" alt="Banner Samsung" />
+            </div>
+            <div>
+                <img src="~/Content/images/apple-logo.svg" class="image-fluid" alt="Banner Apple" />
+            </div>
+            <div>
+                <img src="~/Content/images/oppo-logo.svg" class="image-fluid" alt="Banner Oppo" />
+            </div>
+            <div>
+                <img src="~/Content/images/huawei-logo.svg" class="image-fluid" alt="Banner Huawei" />
+            </div>
+        </div>
+        <div class="slider-btn">
+            <span class="prev position"><i class="fas fa-chevron-left"></i></span>
+            <span class="next position right"><i class="fas fa-chevron-right"></i></span>
+        </div>
+    </div>*@
+
+@*<div class="container">
+        <div class="site-slider-two px-md-2">
+            <div class="row slider-two text-center">
+                <div class="col-md-2 product pt-md-5 pt-4">
+                    <img src="~/Content/images/DellG3.png" alt="Dell G3 Core i5" />
+                    <span class="border site-btn btn-span">Dell G3 Core i5</span>
+                </div>
+                <div class="col-md-2 product pt-md-5 pt-4">
+                    <img src="~/Content/images/ss-s10.png" alt="Samsung Galaxy S10+" />
+                    <span class="border site-btn btn-span">Samsung Galaxy S10+</span>
+                </div>
+                <div class="col-md-2 product pt-md-5 pt-4">
+                    <img src="~/Content/images/macbook-ari.jpg" alt="Macbook Air 2017 MQD32 " />
+                    <span class="border site-btn btn-span">Asus GL553V Gaming</span>
+                </div>
+                <div class="col-md-2 product pt-md-5 pt-4">
+                    <img src="~/Content/images/huawei-p30-pro.png" alt="Huewei P30 Pro" />
+                    <span class="border site-btn btn-span">Huewei P30-Pro</span>
+                </div>
+                <div class="col-md-2 product pt-md-5 pt-4">
+                    <img src="~/Content/images/macbook-2018.jpg" alt=" Macbook Air 2018 " />
+                    <span class="border site-btn btn-span">Macbook Air 2018</span>
+                </div>
+                <div class="col-md-2 product pt-md-5 pt-4">
+                    <img src="~/Content/images/ipad-air-105-inch-wifi-2019-gold-400x400.jpg" alt="Ipad 105 nch Gold" />
+                    <span class="border site-btn btn-span">Ipad 105 Inch Gold</span>
+
+                </div>
+            </div>
+            <div class="slider-btn">
+                <span class="prev position"><i class="fas fa-chevron-left fa-2x product-chevron"></i></span>
+                <span class="next position right"><i class="fas fa-chevron-right fa-2x product-chevron"></i></span>
+            </div>
+        </div>
+    </div>*@
+
+<div class="container pt-2 slider-three">
+    <div class="navigat border">
+        <h2>PHONE </h2>
+    </div>
+    <ul class="homeproduct border d-flex justify-content-center">
+        @foreach (var sanPham in listDienThoai)
+        {
+            <li class="product-img">
+                <a href="/chitietsanpham?IdSanPham=@sanPham.SanPhamId">
+                    <img class="lazyloaded control" src='~/Content/@sanPham.ImgDaiDien' alt="@sanPham.TenSanPham" />
+                    <h3>@Html.DisplayFor(modelItem => @sanPham.TenSanPham)</h3>
+                    <div class="price">
+                        @{
+                            var gia = sanPham.KhuyenMai != null ? sanPham.GiaBan - sanPham.KhuyenMai.SoTienGiam : sanPham.GiaBan;
+                            var strGia = AppHelper.FormatMoney(gia);
+                        }
+                        <strong>@Html.DisplayFor(modelItem => strGia)</strong>
+                        @if (sanPham.KhuyenMai != null)
+                        {
+                            strGia = AppHelper.FormatMoney(sanPham.GiaBan);
+                            <span>@Html.DisplayFor(modelItem => strGia)</span>
+                        }
+                    </div>
+                    @if (sanPham.KhuyenMai != null)
+                    {
+                        strGia = AppHelper.FormatMoney(sanPham.KhuyenMai.SoTienGiam);
+                        <label class="discount1">Giảm @Html.DisplayFor(modelItem => strGia)</label>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+<div class="container pt-2 slider-four">
+    <div class="navigat border">
+        <h2>TABLET </h2>
+    </div>
+    <ul class="homeproduct border d-flex justify-content-center">
+        @foreach (var sanPham in listMayTinhBang)
+        {
+            <li class="product-img">
+                <a href="/chitietsanpham?IdSanPham=@sanPham.SanPhamId">
+                    <img class="lazyloaded control" src='~/Content/@sanPham.ImgDaiDien' alt="@sanPham.TenSanPham" />
+                    <h3>@Html.DisplayFor(modelItem => @sanPham.TenSanPham)</h3>
+                    <div class="price">
+                        @{
+                            var gia = sanPham.KhuyenMai != null ? sanPham.GiaBan - sanPham.KhuyenMai.SoTienGiam : sanPham.GiaBan;
+                            var strGia = AppHelper.FormatMoney(gia);
+                        }
+                        <strong>@Html.DisplayFor(modelItem => strGia)</strong>
+                        @if (sanPham.KhuyenMai != null)
+                        {
+                            strGia = AppHelper.FormatMoney(sanPham.GiaBan);
+                            <span>@Html.DisplayFor(modelItem => strGia)</span>
+                        }
+                    </div>
+                    @if (sanPham.KhuyenMai != null)
+                    {
+                        strGia = AppHelper.FormatMoney(sanPham.KhuyenMai.SoTienGiam);
+                        <label class="discount1">Giảm @Html.DisplayFor(modelItem => strGia)</label>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+<div class="container pt-2 slider-four">
+    <div class="navigat border">
+        <h2>LAPTOP  </h2>
+    </div>
+    <ul class="homeproduct border d-flex justify-content-center">
+        @foreach (var sanPham in listLaptop)
+        {
+            <li class="product-img">
+                <a href="/chitietsanpham?IdSanPham=@sanPham.SanPhamId">
+                    <img class="lazyloaded control" src='~/Content/@sanPham.ImgDaiDien' alt="@sanPham.TenSanPham" />
+                    <h3>@Html.DisplayFor(modelItem => @sanPham.TenSanPham)</h3>
+                    <div class="price">
+                        @{ var gia = sanPham.KhuyenMai != null ? sanPham.GiaBan - sanPham.KhuyenMai.SoTienGiam : sanPham.GiaBan;
+                            var strGia = AppHelper.FormatMoney(gia); }
+                        <strong>@Html.DisplayFor(modelItem => strGia)</strong>
+                        @if (sanPham.KhuyenMai != null)
+                        {
+                            strGia = AppHelper.FormatMoney(sanPham.GiaBan);
+                            <span>@Html.DisplayFor(modelItem => strGia)</span>}
+                    </div>
+                    @if (sanPham.KhuyenMai != null)
+                    {
+                        strGia = AppHelper.FormatMoney(sanPham.KhuyenMai.SoTienGiam);
+                        <label class="discount1">Giảm @Html.DisplayFor(modelItem => strGia)</label>}
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+<div class="container pt-2 slider-four">
+    <div class="navigat border">
+        <h2>Linh Kiện  </h2>
+    </div>
+    <ul class="homeproduct border d-flex justify-content-center">
+        @foreach (var sanPham in listLinhKien)
+        {
+            <li class="product-img">
+                <a href="/chitietsanpham?IdSanPham=@sanPham.SanPhamId">
+                    <img class="lazyloaded control" src='~/Content/@sanPham.ImgDaiDien' alt="@sanPham.TenSanPham" />
+                    <h3>@Html.DisplayFor(modelItem => @sanPham.TenSanPham)</h3>
+                    <div class="price">
+                        @{ var gia = sanPham.KhuyenMai != null ? sanPham.GiaBan - sanPham.KhuyenMai.SoTienGiam : sanPham.GiaBan;
+                         var strGia = AppHelper.FormatMoney(gia); }
+                        <strong>@Html.DisplayFor(modelItem => strGia)</strong>
+                        @if (sanPham.KhuyenMai != null)
+                        {
+                            strGia = AppHelper.FormatMoney(sanPham.GiaBan);
+                            <span>@Html.DisplayFor(modelItem => strGia)</span>}
+                    </div>
+                    @if (sanPham.KhuyenMai != null)
+                    {
+                        strGia = AppHelper.FormatMoney(sanPham.KhuyenMai.SoTienGiam);
+                        <label class="discount1">Giảm @Html.DisplayFor(modelItem => strGia)</label>}
+                </a>
+            </li>
+        }
+    </ul>
+</div>
